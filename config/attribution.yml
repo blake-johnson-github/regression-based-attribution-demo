@@ -1,0 +1,63 @@
+# Regression-based attribution configuration
+data:
+  path: data/sample/sample_daily.csv
+  date_col: date
+  target_col: total_conversions
+
+variables:
+  media_spend_cols:
+    - direct_spend
+    - online_vid_spend
+    - prog_ctv_spend
+    - prog_display_spend
+    - social_spend
+    - stream_audio_spend
+  control_cols: []
+
+transforms:
+  # Carryover / lag response
+  adstock:
+    enabled: true
+    alphas:
+      direct_spend: 0.40
+      online_vid_spend: 0.50
+      prog_ctv_spend: 0.60
+      prog_display_spend: 0.50
+      social_spend: 0.30
+      stream_audio_spend: 0.45
+    max_lag: 26
+
+  # Diminishing returns
+  saturation:
+    enabled: true
+    params:
+      direct_spend: {ec50: 1.0, slope: 1.2}
+      online_vid_spend: {ec50: 1.0, slope: 1.2}
+      prog_ctv_spend: {ec50: 1.0, slope: 1.2}
+      prog_display_spend: {ec50: 1.0, slope: 1.2}
+      social_spend: {ec50: 1.0, slope: 1.2}
+      stream_audio_spend: {ec50: 1.0, slope: 1.2}
+
+model:
+  type: elasticnet
+  target_transform: none   # none | log1p
+  feature_transform: none  # none | log1p
+  positive_media: true     # enforce non-negative coefficients for media variables
+  standardize: true
+
+  cv:
+    n_splits: 5
+    test_size: 8      # periods per fold
+    gap: 0            # optional embargo gap to reduce leakage
+
+  random_state: 42
+
+  hyperparams:
+    # ElasticNet grid; keep small for daily use
+    l1_ratio: [0.1, 0.3, 0.5, 0.8]
+    alpha:    [0.001, 0.01, 0.1, 1.0]
+
+outputs:
+  model_dir: outputs/models
+  figures_dir: outputs/figures
+  reports_dir: reports
