@@ -98,18 +98,3 @@ Sequential workflow in `notebooks/`:
 3. `03_model_fit.ipynb` - Model training and diagnostics
 4. `04_attribution_outputs.ipynb` - Contribution decomposition and ROI
 5. `05_sensitivity.ipynb` - Parameter sensitivity analysis
-
-## Tests
-
-```bash
-pip install -e ".[dev]"
-pytest
-```
-
-## Development
-
-```bash
-black src/
-ruff check src/
-nbqa ruff notebooks/
-```
