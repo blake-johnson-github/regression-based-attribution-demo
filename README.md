@@ -9,7 +9,6 @@ Workflow includes fitting **ElasticNet** model with media response transformatio
 ## Quickstart
 
 ```bash
-git clone <repo-url>
 cd rba-analysis
 python -m venv .venv
 source .venv/bin/activate
