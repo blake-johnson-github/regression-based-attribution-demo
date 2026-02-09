@@ -4,6 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "attrib-regression"
+description = "Regression-based attribution analysis used to estimate the incremental value of individual media mix channels."
+author = "Blake Johnson"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
