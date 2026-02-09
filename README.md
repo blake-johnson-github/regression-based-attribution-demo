@@ -2,7 +2,7 @@
 
 An end-to-end Python project demonstrating **regression-based attribution (RBA)** workflow.
 
-Workflow includes fitting **ElasticNet** model with media response transformations (i.e., **ad stock** (lagged carryover) and **saturation** (diminishing returns)), ultimately producing output showing the contribution and ROI for each channel.
+Workflow includes fitting **ElasticNet** model with media response transformations (i.e., **ad stock** and **saturation**), ultimately producing output showing the contribution and ROI for each channel.
 
 > **Note:** This repo was recreated to serve as a portfolio demo. All **client data, identifiers, and other potentially sensitive information** has been removed. Included data is **synthetic** and for demonstration purposes only.
 
